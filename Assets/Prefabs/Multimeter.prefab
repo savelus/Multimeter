@@ -606,14 +606,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e184e8b962eb114bab99b4652d37d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StateCursors:
+  stateCursors:
   - {fileID: 8646413854321277897}
   - {fileID: 7861389731477347184}
   - {fileID: 7861389731877578019}
   - {fileID: 7861389732398135336}
   - {fileID: 7861389731647177443}
-  Material: {fileID: 2100000, guid: 019cfd05186da3b4887fdc8a26323b21, type: 2}
-  RegulatorCollider: {fileID: 7861389731694955981}
+  material: {fileID: 2100000, guid: 019cfd05186da3b4887fdc8a26323b21, type: 2}
 --- !u!114 &2097300389106510421
 MonoBehaviour:
   m_ObjectHideFlags: 0

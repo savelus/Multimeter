@@ -1,3 +1,5 @@
+using Controllers;
+using Data;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +12,6 @@ public class MultimeterManager : MonoBehaviour
 
     private void Awake()
     {
-        
         regulatorController.OnStateChange += _calculationSystem.Calculate;
         regulatorController.OnStateChange += ChangeDisplayView;
         regulatorController.OnStateChange += ChangeDisplayText;
