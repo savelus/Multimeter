@@ -1,28 +1,37 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RegulatorController : MonoBehaviour
 {
-    public Regulator Regulator;
+    public Action OnStateChange;
+    public Regulator regulator;
+    
     private int _intCurrentState;
-    private RegulatorCurrentState _currentState;
     private bool _onModeSelection;
+    private List<GameObject> _stateCursors;
+    public RegulatorCurrentState GetCurrentState => (RegulatorCurrentState)_intCurrentState;
+    
+
+    private void Awake()
+    {
+        _stateCursors = regulator.StateCursors;
+    }
     private void OnMouseEnter()
     {
-        Regulator.Material.color = Color.blue;
+        regulator.Material.color = Color.blue;
         _onModeSelection = true;
-        
     }
 
     private void OnMouseExit()
     {
-        Regulator.Material.color = Color.white;
+        regulator.Material.color = Color.white;
         _onModeSelection = false;
     }
 
     private void OnMouseOver()
     {
-        
         var currentMouseWheel = Input.GetAxis("Mouse ScrollWheel");
         if(currentMouseWheel == 0 ) return;
         SetNewCurrentState(currentMouseWheel);
@@ -36,17 +45,17 @@ public class RegulatorController : MonoBehaviour
         }
         else
         {
-            _intCurrentState -= 1;
-            if (_intCurrentState < 0) _intCurrentState = 4;
+            _intCurrentState = (_intCurrentState + 4) % 5;
         }
         SetState(_intCurrentState);
+        
+        OnStateChange?.Invoke();
     }
     private void SetState(int currentState)
     {
-        var stateCursors = Regulator.StateCursors;
-        for (int i = 0; i < stateCursors.Count; i++)
+        for (int i = 0; i < _stateCursors.Count; i++)
         {
-            stateCursors[i].SetActive(i == currentState);
+            _stateCursors[i].SetActive(i == currentState);
         }
     }
 
